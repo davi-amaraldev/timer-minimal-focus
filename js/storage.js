@@ -37,20 +37,35 @@ export function loadState(){
 
         return state;
     } catch(err){
-        console.log('Erro ao carregar o state, resetando.', error)
+        console.log('Erro ao carregar o state, resetando.', err)
         return createDefaultState();
     }
 }
 
-export function saveStatus(state){
+export function saveState(state){
     localStorage.setItem(STORAGE_KEY, JSON.stringify(state));
 }
 
 export function ensureToday(state){
-    let today = Date.now();
+    const now = Date.now();
+    
+    const year = now.getFullYear();
+    const month = String(now.getMonth() + 1).padStart(2, '0');
+    const day = String(now.getDate()).padStart(2, '0');
 
-    return today;
+    const todayKey = `${year}-${month}-${day}`;
+
+    if(!state.history || typeof state.history !== "object"){
+        state.history = {};
+    }
+
+    if(!state.history[todayKey]){
+        state.history[todayKey] = {
+            sessions: 0,
+            minutes: 0
+        }
+    }
+
+    return todayKey;
 }
 
-
-ensureToday(state);
