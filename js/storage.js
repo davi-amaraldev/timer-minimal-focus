@@ -1,5 +1,3 @@
-// vou utilizar export e import para trabalhar com vários arquivos
-
 const STORAGE_KEY = 'focus_timer_v1';
 
 export function createDefaultState(){
@@ -19,15 +17,13 @@ export function loadState(){
     try{
         const raw = localStorage.getItem(STORAGE_KEY);
 
-        if(!raw){
+        if(!raw){   
             return createDefaultState();
         }
 
-        const parsed = JSON.parse(raw); // caso existam dados, vou converter eles pra JSON
+        const parsed = JSON.parse(raw); 
 
-        const base = createDefaultState(); // criar a base padrão 
-
-        // garantir todos os dados
+        const base = createDefaultState();
 
         const state = {
             ... base,
@@ -47,7 +43,7 @@ export function saveState(state){
 }
 
 export function ensureToday(state){
-    const now = Date.now();
+    const now = new Date();
     
     const year = now.getFullYear();
     const month = String(now.getMonth() + 1).padStart(2, '0');
@@ -68,4 +64,3 @@ export function ensureToday(state){
 
     return todayKey;
 }
-
