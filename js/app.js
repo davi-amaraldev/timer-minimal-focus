@@ -1,2 +1,4 @@
-import { saveState, loadState } from "./storage";   
-import { start, pause, reset, tick } from "./timer.js"
+import { saveState, loadState } from "./storage.js";   
+import { start, pause, reset, tick } from "./timer.js";
+
+const state = loadState() || saveState();
