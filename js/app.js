@@ -1,4 +1,4 @@
-import { saveState, loadState } from "./storage.js";   
+import { saveState, loadState, ensureToday } from "./storage.js";   
 import { start, pause, reset, tick } from "./timer.js";
 
 const state = loadState();
@@ -8,13 +8,21 @@ function syncState(){
 }
 
 function startHandler(){
-    start(state);
-    syncState();
+    try {
+        start(state);
+        syncState();
+    } catch (err){
+            console.log(err.message);
+    }
 }
 
 function pauseHandler(){
-    pause(state);
-    syncState();
+    try{
+        pause(state);
+        syncState();
+    } catch (err){
+            console.log(err.message);
+    }
 }
 
 function resetHandler(){
@@ -22,3 +30,18 @@ function resetHandler(){
     syncState();
 }
 
+function finishHandler(){
+    const todayKey = ensureToday(state);
+
+    state.history[todayKey].sessions += 1;
+    state.history[todayKey].minutes += Math.round(state.durationSec / 60);
+
+    syncState();
+}
+
+function update(){
+    tick(state, { onFinish: finishHandler });
+    syncState();
+}
+
+setInterval(update, 1000);
