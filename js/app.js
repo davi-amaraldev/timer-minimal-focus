@@ -1,10 +1,12 @@
 import { saveState, loadState, ensureToday } from "./storage.js";   
 import { start, pause, reset, tick } from "./timer.js";
+import { btnControls, setTimerText } from "./ui.js";
 
 const state = loadState();
 
 function syncState(){
     saveState(state);
+    setTimerText(state.remainingSec)
 }
 
 function startHandler(){
@@ -43,5 +45,13 @@ function update(){
     tick(state, { onFinish: finishHandler });
     syncState();
 }
+
+btnControls({
+    onStart: startHandler,
+    onPause: pauseHandler,
+    onReset: resetHandler
+})
+
+syncState()
 
 setInterval(update, 1000);
