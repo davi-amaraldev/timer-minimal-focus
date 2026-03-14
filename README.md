@@ -1,51 +1,128 @@
 # Focus Timer
 
-Timer de foco (pomodoro minimal) feito em JavaScript, salvando estado no `localStorage`.
+Projeto de estudo feito para praticar **HTML**, **CSS** e **JavaScript modular** na construção de uma aplicação simples de timer.
 
-## O que tem
+## Sobre o projeto
 
-- iniciar / pausar / resetar  
-- presets de tempo (ex: 25m, 5m, 50m)  
-- continua de onde parou ao recarregar a página  
-- histórico por dia (sessões e minutos)  
+O **Focus Timer** é um projeto de estudo com foco em organização de código, separação de responsabilidades e manipulação do DOM.
 
-## Rodando localmente
+A aplicação permite:
 
-Como usa ES Modules, precisa de servidor local:
+- iniciar o timer
+- pausar o timer
+- resetar o timer
+- salvar o estado no navegador com `localStorage`
+- registrar sessões concluídas por dia
 
-```bash
-npx serve .
-```
+## Objetivo de estudo
 
-Abra o endereço que aparecer no terminal.
+Este projeto foi desenvolvido para treinar:
 
-## Estrutura
+- estruturação de projeto front-end
+- divisão de responsabilidades em módulos
+- manipulação de interface com JavaScript
+- persistência de dados com `localStorage`
+- organização de lógica de aplicação sem frameworks
 
-```
-focus-timer/
-├─ index.html
-├─ css/
-│  └─ style.css
-└─ js/
-   ├─ app.js       # integração geral (eventos + interval + render)
-   ├─ timer.js     # regras do timer (start/pause/reset/tick)
-   ├─ storage.js   # load/save + histórico por dia
-   ├─ ui.js        # renderização do DOM
-   └─ utils.js     # helpers (formatar mm:ss, data etc.)
-```
+## Tecnologias utilizadas
 
-## Persistência
+- HTML5
+- CSS3
+- JavaScript (ES Modules)
+- LocalStorage
+- Python HTTP Server
+- Makefile
 
-Os dados são salvos no `localStorage` usando a chave:
+## Estrutura do projeto
 
-```
-focus_timer_v1
-```
+    focus-timer/
+    ├── css/
+    │   └── style.css
+    ├── js/
+    │   ├── app.js
+    │   ├── storage.js
+    │   ├── timer.js
+    │   └── ui.js
+    ├── index.html
+    ├── Makefile
+    └── README.md
 
-## Observação
+## Organização dos arquivos
 
-Projeto de estudo para praticar:
-- organização em múltiplos arquivos JS
-- manipulação de estado
-- persistência no navegador
-- lógica de tempo com `Date` e `setInterval`
+- **app.js** → coordena a aplicação
+- **timer.js** → contém a lógica do cronômetro
+- **storage.js** → salva e carrega o estado no `localStorage`
+- **ui.js** → atualiza a interface e conecta os botões
+
+## Funcionalidades atuais
+
+- exibição do tempo no formato `mm:ss`
+- botão de start
+- botão de pause
+- botão de reset
+- atualização do timer em tempo real
+- persistência do estado no navegador
+- registro de histórico diário de sessões concluídas
+
+## Como rodar o projeto
+
+Como o projeto usa **módulos JavaScript**, não é recomendado abrir o `index.html` diretamente com `file://`.
+
+Use um servidor local.
+
+### Linux / macOS
+
+    make run
+
+### Windows
+
+    python -m http.server 5500
+
+Depois, abra no navegador:
+
+    http://localhost:5500
+
+## Makefile
+
+    PORT ?= 5500
+
+    run:
+	 python3 -m http.server $(PORT)
+
+    run-win:
+	 python -m http.server $(PORT)
+
+
+## Estado da aplicação
+
+A aplicação trabalha com um estado base parecido com este:
+
+    {
+      durationSec: 1500,
+      remainingSec: 1500,
+      running: false,
+      endAt: null,
+      history: {}
+    }
+
+### Significado de cada campo
+
+- `durationSec` → duração total da sessão
+- `remainingSec` → tempo restante
+- `running` → informa se o timer está em execução
+- `endAt` → timestamp previsto para o fim da sessão
+- `history` → histórico diário de sessões concluídas
+
+## Próximos passos
+
+Algumas ideias para evoluir este projeto de estudo:
+
+- permitir duração personalizada
+- adicionar pausa curta e pausa longa
+- mostrar histórico na interface
+- melhorar feedback visual dos botões
+- adicionar alerta sonoro ao finalizar a sessão
+
+## Autor
+
+Feito por **Davi** como projeto de estudo.
