@@ -1,7 +1,11 @@
 const startBtn = document.querySelector('.start-btn');
 const pauseBtn = document.querySelector('.pause-btn');
 const resetBtn = document.querySelector('.reset-btn');
+const applyBtn = document.querySelector('.apply-btn');
+const timeInput = document.querySelector('.time-input');
 const timerText = document.querySelector('.timer');
+const messageText = document.querySelector('.message');
+
 
 export function setTimerText(seconds){
     timerText.textContent = formatTimer(seconds);
@@ -17,8 +21,21 @@ function formatTimer(seconds){
     return `${formatMinutes}:${formatSecs}`;
 }
 
-export function btnControls({onStart, onPause, onReset}){
+export function btnControls({onStart, onPause, onReset, onApply}){
     startBtn.addEventListener('click', onStart);
     pauseBtn.addEventListener('click', onPause);
-    resetBtn.addEventListener('click', onReset)
+    resetBtn.addEventListener('click', onReset);
+    applyBtn.addEventListener('click', onApply)
+}
+
+export function getDurationInputValue(){
+    return Number(timeInput.value);
+}
+
+export function setMessage(text){
+    messageText.textContent = text;
+}
+
+export function clearMessage(){
+    messageText.textContent = '';
 }
