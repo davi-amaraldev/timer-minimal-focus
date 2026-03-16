@@ -3,17 +3,25 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>focus</title>
+    <title>Focus Timer</title>
     <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
     
     <section class="container">
-
         <div class="center">
             <h1>Focus Timer</h1>
 
+            <div class="timer-config">
+                <label for="time-input">Minutos</label>
+                <div class="time-actions">
+                    <input id="time-input" type="number" class="time-input" min="1" value="30">
+                    <button class="apply-btn">Aplicar</button>
+                </div>
+            </div>
+
             <p class="timer">00:00</p>
+
             <div class="btn">
                 <button class="start-btn">Start</button>
                 <button class="pause-btn">Pause</button>
