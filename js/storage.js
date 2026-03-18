@@ -2,8 +2,8 @@ const STORAGE_KEY = 'focus_timer_v1';
 
 export function createDefaultState(){
     let state = {
-        durationSec: 1500,
-        remainingSec: 1500,
+        durationSec: 0,
+        remainingSec: 0,
         running: false,
         endAt: null,
         history: {

@@ -39,7 +39,7 @@ function applyDurationHandler(){
     try{
         const minutes = getDurationInputValue();
 
-        if(minutes <= 0 || Number.isNaN(minutes)){
+        if(minutes <= 0 || Number.isNaN(minutes) || minutes >= 120){
             throw new Error('Minuto inválido')
         }
 
